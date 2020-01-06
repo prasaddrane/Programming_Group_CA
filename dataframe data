@@ -1,0 +1,12 @@
+
+Define the ticker list
+import pandas as pd
+tickers_list = ['AAPL', 'IBM', 'MSFT', 'WMT']
+# Import pandas
+data = pd.DataFrame(columns=tickers_list)
+# Feth the data
+for ticker in tickers_list:
+ data[ticker] = quandl.get('WIKI/' + ticker, start_date=start_date,
+ end_date=end_date, api_key=QUANDL_API_KEY)['Adj. Close']
+# Print first 5 rows of the data
+data.head()
