@@ -1,0 +1,10 @@
+import pandas as pd
+from pandas_datareader import data
+# Set the start and end date
+start_date = '1990-01-01'
+end_date = '2019-02-01'
+# Set the ticker
+ticker = 'AMZN'
+# Get the data
+data = data.get_data_yahoo(ticker, start_date, end_date)
+data.head()
