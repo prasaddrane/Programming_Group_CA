@@ -53,7 +53,24 @@ def users():
 	finally:
 		cursor.close() 
 	conn.close()
-		
+
+@app.route('/securities')
+def securuties():
+	conn = mysql.connect
+	cursor = conn.cursor()
+	try:
+		cursor.execute("SELECT * from securities")
+		rows = cursor.fetchall()
+		resp = jsonify(rows)
+		#resp.status_code = 200
+		#json.dumps(rows)
+		return resp
+	except Exception as e:
+		print(e)
+	finally:
+		cursor.close() 
+	conn.close()
+
 @app.route('/user/<int:id>')
 def user(id):
 	conn = mysql.connect
