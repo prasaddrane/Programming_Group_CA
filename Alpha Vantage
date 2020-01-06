@@ -1,0 +1,17 @@
+# Install the alpha_vantage
+!pip install alpha_vantage
+
+
+# Import TimeSeries class
+from alpha_vantage.timeseries import TimeSeries
+ALPHA_VANTAGE_API_KEY = 'REPLACE-THIS-TEXT-WITH-A-REAL-API-KEY'
+# This is to prompt you to change the ALPHA_VANTAGE Key
+if ALPHA_VANTAGE_API_KEY == 'REPLACE-THIS-TEXT-WITH-A-REAL-API-KEY':
+ raise Exception("Please provide a valid Alpha Vantage API key!")
+# Initialize the TimeSeries class with key and output format
+ts = TimeSeries(key=ALPHA_VANTAGE_API_KEY, output_format='pandas')
+# Get pandas dataframe with the intraday data and information of the data
+intraday_data, data_info = ts.get_intraday(
+ 'GOOGL', outputsize='full', interval='1min')
+# Print the information of the data
+data_info
