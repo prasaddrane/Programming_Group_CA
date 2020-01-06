@@ -106,6 +106,24 @@ def groupby():
 		cursor.close() 
 	conn.close()
 
+@app.route('/join')
+def join():
+	conn = mysql.connect
+	cursor = conn.cursor()
+	try:
+		sql = "select prices.open, prices_split_adjusted.low as Lowest from prices INNER JOIN prices_split_adjusted on prices.open = prices_split_adjusted.low"
+		cursor.execute(sql)
+		rows = cursor.fetchall()
+		resp = jsonify(rows)
+		#resp.status_code = 200
+		#json.dumps(rows)
+		return resp
+	except Exception as e:
+		print(e)
+	finally:
+		cursor.close() 
+	conn.close()
+
 @app.route('/user/<int:id>')
 def user(id):
 	conn = mysql.connect
