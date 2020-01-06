@@ -55,11 +55,46 @@ def users():
 	conn.close()
 
 @app.route('/securities')
-def securuties():
+def securities():
 	conn = mysql.connect
 	cursor = conn.cursor()
 	try:
 		cursor.execute("SELECT * from securities")
+		rows = cursor.fetchall()
+		resp = jsonify(rows)
+		#resp.status_code = 200
+		#json.dumps(rows)
+		return resp
+	except Exception as e:
+		print(e)
+	finally:
+		cursor.close() 
+	conn.close()
+
+@app.route('/pricesplit')
+def pricesplit():
+	conn = mysql.connect
+	cursor = conn.cursor()
+	try:
+		cursor.execute("SELECT * from prices_split_adjusted")
+		rows = cursor.fetchall()
+		resp = jsonify(rows)
+		#resp.status_code = 200
+		#json.dumps(rows)
+		return resp
+	except Exception as e:
+		print(e)
+	finally:
+		cursor.close() 
+	conn.close()
+
+@app.route('/groupby')
+def groupby():
+	conn = mysql.connect
+	cursor = conn.cursor()
+	try:
+		sql = "select date as opendate, open as Openprice, symbol as Company from prices_split_adjusted group by date, open, symbol having date between '2016-01-05' and '2016-06-16'"
+		cursor.execute(sql)
 		rows = cursor.fetchall()
 		resp = jsonify(rows)
 		#resp.status_code = 200
