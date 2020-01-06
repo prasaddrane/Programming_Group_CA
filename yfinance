@@ -1,0 +1,7 @@
+# Install the yfinance 
+!pip install yfinance
+# Code to fetch the stock market data for MSFT for the past 5 days of 1-minute frequency.
+data = yf.download(tickers="MSFT",
+ period="5d",
+ interval="1m")
+data.head()
